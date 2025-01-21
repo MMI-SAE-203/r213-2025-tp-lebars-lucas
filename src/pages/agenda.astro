@@ -1,0 +1,27 @@
+---
+const events = [
+ {
+     title: "Conférence sur les astres",
+     date: "Lundi 12 Juillet",
+     favori: true,
+ },
+ {
+     title: "Atelier sur les étoiles",
+     date: "Mardi 13 Juillet",
+     favori: false,
+ },
+];
+import Base from '../layouts/Base.astro';
+---
+
+<Base titre="Agenda">
+    <h1 class="animate-pulse justify-center flex mt-10 text-lg mb-14">Bienvenue sur la page agenda !</h1>
+    {events.map((event) => (
+        <div >
+           <h2 class="justify-center flex text-teal-900 font-bold ">{event.title}</h2>
+           <h2 class="justify-center flex text-teal-900 font-bold">{event.date}</h2>
+           {event.favori && <p class="justify-center flex mb-10">⭐</p>}
+        </div>
+    ))}
+</Base>
+

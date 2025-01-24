@@ -6,5 +6,5 @@ const { title, date, favori } = Astro.props;
     <h2 class="justify-center flex font-bold text-teal-900">{title}</h2>
     <p class="justify-center flex font-bold text-teal-900">{date}</p>
     {favori && <p class="justify-center flex mb-5">⭐</p>}
-    <button x-on:click="favori = !favori" class="justify-center flex bg-slate-200 rounded-2xl p-3">Favori</button>
+    <button class="justify-center flex bg-slate-200 rounded-2xl p-3" x-on:click="favori = !favori" >Favori</button>
 </div>

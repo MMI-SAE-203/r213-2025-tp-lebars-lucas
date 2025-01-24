@@ -2,14 +2,30 @@
 const { ...offre } = Astro.props;
 ---
 
-<ul class="list-disc ml-5">
-    <li>{offre.adresse}</li>
-    <li>{offre.id}</li>
-    <li>{offre.nbChambres}</li>
-    <li>{`${offre.favoris}`}</li>
-    <li>{offre.nbSdb}</li>
-    <li>{offre.nomMaison}</li>
-    <li>{offre.prix}</li>
-    <li>{offre.surface}</li>
-    <li>{offre.imgUrl}</li>
-</ul>
+
+
+<div class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-gradient-to-r from-teal-700 to-teal-900 text-white m-4">
+    <img class="w-full" src={offre.imgUrl} alt="" />
+    <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">{offre.nomMaison}</div>
+        <p class="text-base">
+            {offre.adresse}
+        </p>
+        <p class="text-base">
+            {offre.nbChambres} Chambres, {offre.nbSdb} Salles de bain
+        </p>
+        <p class="text-base">
+            Surface: {offre.surface} m²
+        </p>
+        <p class="text-base">
+            Prix: {offre.prix} €
+        </p>
+    </div>
+    <div class="px-6 pt-4 pb-2">
+        {offre.favoris ? (
+            <span class="inline-block bg-yellow-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">⭐ Favori</span>
+        ) : (
+            <span class="inline-block bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">❌ Non Favori</span>
+        )}
+    </div>
+</div>

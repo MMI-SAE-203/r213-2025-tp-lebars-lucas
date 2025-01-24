@@ -1,0 +1,16 @@
+---
+const { ...offre } = Astro.props;
+
+---
+
+<ul class="list-disc ml-5">
+    <li>{offre.adresse}</li>
+    <li>{offre.id}</li>
+    <li>{offre.nbChambres}</li>
+    <li>{`${offre.favoris}`}</li>
+    <li>{offre.nbSdb}</li>
+    <li>{offre.nomMaison}</li>
+    <li>{offre.prix}</li>
+    <li>{offre.surface}</li>
+    <li>{offre.imgUrl}</li>
+</ul>

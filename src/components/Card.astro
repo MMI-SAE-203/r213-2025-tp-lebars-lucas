@@ -1,5 +1,6 @@
 ---
 const { title, date, favori } = Astro.props;
+const { adresse, favoris, id, nbChambres, nbSdb, nomMaison, prix, surface, imgUrl } = Astro.props;
 ---
 
 <div x-data=`{favori: ${favori}}` x-bind:class="{'bg-pink-200': favori}">

@@ -2,62 +2,50 @@
 import Base from '../layouts/Base.astro';
 import Card from '../components/Card.astro';
 import CardOffre from '../components/CardOffre.astro';
-const offres = [
-    {
-        "adresse": "2821 Lake Sevilla, Palm Harbor, TX",
-        "favoris": true,
-        "id": "64l3n8nar836i5j",
-        "nbChambres": 4,
-        "nbSdb": 2,
-        "nomMaison": "Beverly Springfield",
-        "prix": 2700,
-        "surface": 45,
-        "imgUrl": "image1.png"
-    },
-    {
-        "adresse": "2699 Green Valley, Highland Lake",
-        "favoris": true,
-        "id": "lo831zeg10hpm9y",
-        "nbChambres": 4,
-        "nbSdb": 2,
-        "nomMaison": "Palm Harbor",
-        "prix": 2095,
-        "surface": 42,
-        "imgUrl": "image2.png"
-    },
-    {
-        "adresse": "909 Woodland St, Michigan, IN",
-        "favoris": false,
-        "id": "s1zuhj19x8eb242",
-        "nbChambres": 4,
-        "nbSdb": 3,
-        "nomMaison": "Faulkner Ave",
-        "prix": 4550,
-        "surface": 80,
-        "imgUrl": "image3.png"
-    }
-]
+import {getData} from '../js/backend.mjs';
+
+const offres = await getData()
 ---
 <Base titre="Offres">
-        <h1 class="animate-pulse justify-center flex mt-10 text-lg mb-10">Bienvenue sur la page des offres !</h1>
-    
-        <div x-data="{ showFavorites: false }" class="flex flex-col items-center">
-            <button @click="showFavorites = !showFavorites" class="bg-teal-700 hover:bg-teal-800 text-white font-bold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out cursor-pointer mb-10 transform hover:scale-105 active:scale-95">
+    <h1 class="animate-pulse justify-center flex mt-10 text-lg mb-10">Bienvenue sur la page des offres !</h1>
+
+    <div x-data="{ showFavorites: false, viewMode: 'grid' }" class="flex flex-col items-center">
+        <div class="flex space-x-4 mb-10">
+            <button @click="showFavorites = !showFavorites" class="bg-teal-700 hover:bg-teal-800 text-white font-bold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out cursor-pointer transform hover:scale-105 active:scale-95 flex items-center">
+                <span class="mr-2" x-show="!showFavorites">⭐</span>
+                <span class="mr-2" x-show="showFavorites">🔄</span>
                 <span x-show="!showFavorites">Afficher les favoris</span>
                 <span x-show="showFavorites">Afficher tout</span>
             </button>
-    
-            <div class="flex flex-wrap justify-center transition-all duration-500 ease-in-out">
-                <template x-if="!showFavorites">
-                    <div class="flex flex-wrap justify-center">
-                        {offres.map((offre) => <CardOffre {...offre} />)}
-                    </div>
-                </template>
-                <template x-if="showFavorites">
-                    <div class="flex flex-wrap justify-center">
-                        {offres.filter((offre) => offre.favoris).map((offre) => <CardOffre {...offre} />)}
-                    </div>
-                </template>
-            </div>
+            <button @click="viewMode = 'grid'" :class="viewMode === 'grid' ? 'bg-teal-800' : 'bg-teal-700'" class="text-white font-bold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out cursor-pointer transform hover:scale-105 active:scale-95 flex items-center">
+                <span class="mr-2">🔲 </span>
+                Affichage en grille
+            </button>
+            <button @click="viewMode = 'list'" :class="viewMode === 'list' ? 'bg-teal-800' : 'bg-teal-700'" class="text-white font-bold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out cursor-pointer transform hover:scale-105 active:scale-95 flex items-center">
+                <span class="mr-2">📋</span>
+                Affichage en liste
+            </button>
         </div>
-    </Base>
+
+        <div class="w-full transition-all duration-500 ease-in-out">
+            <template x-if="!showFavorites">
+                <div :class="viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4' : 'flex flex-col'">
+                    {offres.map((offre) => (
+                        <div class="viewMode === 'grid' ? 'w-full mb-4' : 'w-full mb-4'">
+                            <CardOffre {...offre} />
+                        </div>
+                    ))}
+                </div>
+            </template>
+            <template x-if="showFavorites">
+                <div :class="viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4' : 'flex flex-col'">
+                    {offres.filter((offre) => offre.favori).map((offre) => (
+                        <div class="viewMode === 'grid' ? 'w-full mb-4' : 'w-full mb-4'">
+                            <CardOffre {...offre} />
+                        </div>
+                    ))}
+                </div>
+            </template>
+        </div>
+    </div>
+</Base>

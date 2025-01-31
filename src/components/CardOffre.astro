@@ -4,25 +4,13 @@ const { ...offre } = Astro.props;
 
 
 
-<div class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-gradient-to-r from-teal-700 to-teal-900 text-white m-4">
-    <img class="w-full" src={offre.imgUrl} alt="" />
-    <div class="px-6 py-4">
+<div class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-gradient-to-r from-teal-700 to-teal-900 text-white m-4  flex flex-col items-center">
+    <img class="w-full h-48 object-cover" src={offre.img} alt={offre.nomMaison} />
+    <div class="px-6 py-4 text-center">
         <div class="font-bold text-xl mb-2">{offre.nomMaison}</div>
-        <p class="text-base">
-            {offre.adresse}
-        </p>
-        <p class="text-base">
-            {offre.nbChambres} Chambres, {offre.nbSdb} Salles de bain
-        </p>
-        <p class="text-base">
-            Surface: {offre.surface} m²
-        </p>
-        <p class="text-base">
-            Prix: {offre.prix} €
-        </p>
     </div>
-    <div class="px-6 pt-4 pb-2">
-        {offre.favoris ? (
+    <div class="px-6 pt-4 pb-2 text-center">
+        {offre.favori ? (
             <span class="inline-block bg-yellow-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">⭐ Favori</span>
         ) : (
             <span class="inline-block bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">❌ Non Favori</span>

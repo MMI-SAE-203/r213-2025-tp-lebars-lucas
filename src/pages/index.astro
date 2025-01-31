@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import CardOffre from '../components/CardOffre.astro';
-import { getData } from '../js/backend.mjs';
+import { getData } from '../js/backend.old.mjs';
 
 const offres = await getData();
 const offresFavoris = offres.filter(offre => offre.favori);

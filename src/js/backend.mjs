@@ -28,11 +28,7 @@ export async function allMaisonsSorted() {
     return record;
 }
 
- /* Etape 14. */
-export async function bySurface(s) {
-    const record = await pb.collection('maison').getFullList({ filter : `surface > ${s}`}) ;
-    return record;
-}
+
 
  /* Etape 15. */
 export async function surfaceORprice(p,s) {
@@ -64,7 +60,7 @@ export async function bySurface(surface) {
             filter: `surface > ${surface}`
         });
         return records.map(record => {
-            record.img = pb.files.getURL(record, record.images);
+            record.imageUrl = pb.files.getURL(record, record.images);
             return record;
         });
     } catch (error) {

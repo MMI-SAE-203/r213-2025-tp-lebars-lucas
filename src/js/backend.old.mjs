@@ -12,7 +12,7 @@ export async function getData() {
       }
   ); // Filtrer les événements passés en fonction de la date. Si la colonne date n'est pas dans votre collection, vous pouvez la remplacer par une autre colonne de type date.
   data = data.map((d) => {
-      d.img = pb.files.getURL(d, d.images);
+      d.imageUrl = pb.files.getURL(d, d.images);
       return d;
   }); // Récupérer l'URL de l'image de chaque événement. Vous pouvez remplacer imgUrl par le nom de la colonne qui contient le nom de l'image.
     return data;

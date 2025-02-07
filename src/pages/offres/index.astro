@@ -28,7 +28,17 @@ console.log(offres);
                 <span class="mr-2">📋</span>
                 Affichage en liste
             </button>
+            
         </div>
+        <div class="flex justify-center mb-20">
+            <a href="/offres/surface/80" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-full shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105 active:scale-95">
+                Voir les maisons avec une surface  80 m²
+            </a>
+            <a href="/offres/prix/300000" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-full shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105 active:scale-95">
+                Voir les maisons avec un prix  300000 € 
+            </a>
+        </div>
+      
 
         <div class="w-full transition-all duration-500 ease-in-out">
             <template x-if="!showFavorites">
@@ -53,9 +63,5 @@ console.log(offres);
     </div>
     
 
-    <div class="flex justify-center mb-20">
-        <a href="/offres/surface/80" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-full shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105 active:scale-95">
-            Voir les maisons avec une surface > 80 m²
-        </a>
-    </div>
+    
 </Base>

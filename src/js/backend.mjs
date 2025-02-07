@@ -68,3 +68,33 @@ export async function bySurface(surface) {
         return [];
     }
 }
+
+export async function byPrice(prix) {
+    try {
+        const records = await pb.collection('maison').getFullList({
+            filter: `prix < ${prix}`
+        });
+        return records.map(record => {
+            record.imageUrl = pb.files.getURL(record, record.images);
+            return record;
+        });
+    } catch (error) {
+        console.error('Une erreur est survenue en récupérant les maisons:', error);
+        return [];
+    }
+}
+
+export async function byPriceRange(minPrix, maxPrix) {
+    try {
+        const records = await pb.collection('maison').getFullList({
+            filter: `prix >= ${minPrix} && prix <= ${maxPrix}`
+        });
+        return records.map(record => {
+            record.imageUrl = pb.files.getURL(record, record.images);
+            return record;
+        });
+    } catch (error) {
+        console.error('Une erreur est survenue en récupérant les maisons:', error);
+        return [];
+    }
+}

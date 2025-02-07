@@ -1,0 +1,22 @@
+---
+// filepath: /c:/Users/lucas/OneDrive/Github/r213-2025-tp-lebars-lucas/src/pages/offres/prix/[prix].astro
+import Base from '../../../layouts/Base.astro';
+import CardOffre from '../../../components/CardOffre.astro';
+import { byPrice } from '../../../js/backend.mjs';
+
+const { prix } = Astro.params;
+console.log(prix);
+
+const offres = await byPrice(prix);
+---
+
+<Base titre={`Maisons avec un prix inférieur à ${prix} €`}>
+    <h1 class="text-3xl font-bold mt-10 mb-6 text-center">Maisons avec un prix inférieur à {prix} €</h1>
+    <div class="flex flex-wrap justify-center gap-4 py-6">
+        {offres.map((offre) => (
+            <div class="w-full sm:w-1/2 lg:w-1/3 mb-4">
+                <CardOffre {...offre} />
+            </div>
+        ))}
+    </div>
+</Base>

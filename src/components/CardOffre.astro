@@ -16,4 +16,8 @@ const { ...offre } = Astro.props;
             <span class="inline-block bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">❌ Non Favori</span>
         )}
     </div>
+    <a href={`/offres/${offre.id}`} class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-full shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 mb-4">
+        Voir plus
+    </a>
 </div>
+

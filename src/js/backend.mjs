@@ -45,3 +45,30 @@ export async function getAgentByID(id) {
     const record = await pb.collection('agent').getOne(id) ;
     return record;
 }
+
+
+export async function getOffre(id) {
+    try {
+        let data = await pb.collection('maison').getOne(id);
+        data.imageUrl = pb.files.getURL(data, data.images);
+        return data;
+    } catch (error) {
+        console.log('Une erreur est survenue en lisant la maison', error);
+        return null;
+    }
+}
+
+export async function bySurface(surface) {
+    try {
+        const records = await pb.collection('maison').getFullList({
+            filter: `surface > ${surface}`
+        });
+        return records.map(record => {
+            record.img = pb.files.getURL(record, record.images);
+            return record;
+        });
+    } catch (error) {
+        console.error('Une erreur est survenue en récupérant les maisons:', error);
+        return [];
+    }
+}

@@ -1,0 +1,19 @@
+---
+import Base from '../../../layouts/Base.astro';
+import CardOffre from '../../../components/CardOffre.astro';
+import { bySurface } from '../../../js/backend.mjs';
+
+const { surface } = Astro.params;
+const offres = await bySurface(surface);
+---
+
+<Base titre={`Maisons avec une surface supérieure à ${surface} m²`}>
+    <h1 class="animate-pulse text-3xl font-bold mt-10 mb-6 text-center">Maisons avec une surface supérieure à {surface} m²</h1>
+    <div class="flex flex-wrap justify-center gap-4 py-6">
+        {offres.map((offre) => (
+            <div class="w-full sm:w-1/2 lg:w-1/3 mb-4">
+                <CardOffre {...offre} />
+            </div>
+        ))}
+    </div>
+</Base>

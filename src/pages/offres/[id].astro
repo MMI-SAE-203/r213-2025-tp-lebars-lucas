@@ -1,0 +1,28 @@
+---
+import { getOffre } from '../../js/backend.mjs';
+import Base from '../../layouts/Base.astro';
+
+const { id } = Astro.params;
+const offre = await getOffre(id);
+
+console.log(offre);
+
+
+---
+
+<Base titre={offre?.nomMaison}>
+    <div class="flex justify-center items-center min-h-screen bg-gray-100 py-6">
+        <div class="max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden flex">
+            <img class="w-1/2 h-auto object-cover" src={offre?.imageUrl} alt={offre?.nomMaison} />
+            <div class="w-1/2 p-4">
+                <h2 class="text-3xl font-bold mb-4 text-teal-700">{offre?.nomMaison}</h2>
+                <ul class="list-disc list-inside space-y-1 text-gray-700 text-lg">
+                    <li><strong>Adresse:</strong> {offre?.adresse}</li>
+                    <li><strong>Prix:</strong> {offre?.prix} €</li>
+                    <li><strong>Surface:</strong> {offre?.surface} m²</li>
+                    <li><strong>Favori:</strong> {offre?.favori ? 'Oui' : 'Non'}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</Base>

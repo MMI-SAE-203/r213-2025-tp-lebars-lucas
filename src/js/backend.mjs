@@ -1,3 +1,5 @@
+
+
 /* Lucas LEBARS */
 
 
@@ -54,6 +56,17 @@ export async function getOffre(id) {
     }
 }
 
+export async function getOffres(id) {
+    try {
+        let data = await pb.collection('maison').getOne(id);
+        data.imageUrl = pb.files.getURL(data, data.images);
+        return data;
+    } catch (error) {
+        console.log('Une erreur est survenue en lisant la maison', error);
+        return null;
+    }
+}
+
 export async function bySurface(surface) {
     try {
         const records = await pb.collection('maison').getFullList({
@@ -88,6 +101,38 @@ export async function byPriceRange(minPrix, maxPrix) {
     try {
         const records = await pb.collection('maison').getFullList({
             filter: `prix >= ${minPrix} && prix <= ${maxPrix}`
+        });
+        return records.map(record => {
+            record.imageUrl = pb.files.getURL(record, record.images);
+            return record;
+        });
+    } catch (error) {
+        console.error('Une erreur est survenue en récupérant les maisons:', error);
+        return [];
+    }
+}
+
+export async function addOffre(house) {
+    try {
+        await pb.collection('maison').create(house);
+        return {
+            success: true,
+            message: 'Offre ajoutee avec succes'
+        };
+    } catch (error) {
+        console.log('Une erreur est survenue en ajoutant la maison', error);
+        return {
+            success: false,
+            message: 'Une erreur est survenue en ajoutant la maison'
+        };
+    }
+}
+
+
+export async function filterByPrix(prix) {
+    try {
+        const records = await pb.collection('maison').getFullList({
+            filter: `prix < ${prix}`
         });
         return records.map(record => {
             record.imageUrl = pb.files.getURL(record, record.images);

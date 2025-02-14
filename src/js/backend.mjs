@@ -129,17 +129,19 @@ export async function addOffre(house) {
 }
 
 
-export async function filterByPrix(prix) {
+export async function filterByPrix(prixMin, prixMax) {
     try {
-        const records = await pb.collection('maison').getFullList({
-            filter: `prix < ${prix}`
+        let data = await pb.collection('maison').getFullList({
+            sort: '-created',
+            filter: `prix >= ${prixMin} && prix <= ${prixMax}`
         });
-        return records.map(record => {
-            record.imageUrl = pb.files.getURL(record, record.images);
-            return record;
+        data = data.map((maison) => {
+            maison.imageUrl = pb.files.getURL(maison, maison.images);
+            return maison;
         });
+        return data;
     } catch (error) {
-        console.error('Une erreur est survenue en récupérant les maisons:', error);
+        console.log('Une erreur est survenue en filtrant la liste des maisons', error);
         return [];
     }
 }
